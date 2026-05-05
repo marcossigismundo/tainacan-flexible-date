@@ -1,9 +1,9 @@
 /**
  * Componente de exibição/edição do tipo "Flexible Date".
  *
- * Renderiza um input texto livre. A validação acontece no PHP (validate()),
- * então qualquer formato aceito pelo Normalizer passa. O placeholder
- * orienta o usuário sobre formatos esperados.
+ * Usa <b-input> do Buefy para herdar o visual do admin do Tainacan.
+ * A validação acontece no PHP (validate()), então qualquer formato
+ * aceito pelo Normalizer passa. O placeholder orienta o usuário.
  *
  * Padrão de registro segue a documentação oficial do Tainacan:
  * https://tainacan.github.io/tainacan-wiki/#/dev/creating-metadata-type
@@ -34,24 +34,22 @@
             }
         },
         methods: {
-            onInput: function (event) {
-                var v = event && event.target ? event.target.value : event;
-                this.internalValue = v;
-                this.$emit('input', v);
+            onInput: function (value) {
+                this.internalValue = value;
+                this.$emit('input', value);
             },
             onBlur: function () {
                 this.$emit('blur');
             }
         },
         template:
-            '<input type="text" ' +
+            '<b-input ' +
                 ':disabled="disabled" ' +
                 ':value="internalValue" ' +
                 '@input="onInput" ' +
                 '@blur="onBlur" ' +
-                'class="input" ' +
                 'placeholder="YYYY-MM-DD, YYYY-MM, YYYY ou intervalo YYYY-MM-DD/YYYY-MM-DD" ' +
-                'autocomplete="off">'
+                'autocomplete="off"></b-input>'
     };
 
     window.tainacan_extra_components['tainacan-flexible-date'] = TainacanFlexibleDate;

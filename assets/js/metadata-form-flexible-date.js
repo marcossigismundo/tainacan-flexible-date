@@ -1,10 +1,9 @@
 /**
- * Form-component do tipo "Flexible Date" — renderiza as opções de
- * configuração do metadado (allow_partial, allow_range) na tela de
- * edição do metadatum no admin do Tainacan.
+ * Form-component do tipo "Flexible Date" — usa Buefy (b-field, b-radio)
+ * para harmonizar com o admin do Tainacan. Renderiza as opções
+ * allow_partial e allow_range na tela de edição do metadatum.
  *
- * Registrado via hook `tainacan-register-vuejs-component` conforme
- * documentação oficial.
+ * Registrado via hook `tainacan-register-vuejs-component`.
  */
 (function () {
     'use strict';
@@ -41,21 +40,15 @@
             }
         },
         template:
-            '<div class="field">' +
-                '<div class="field">' +
-                    '<label class="label">Permitir datas parciais (YYYY ou YYYY-MM)</label>' +
-                    '<div class="control">' +
-                        '<label class="radio"><input type="radio" :disabled="disabled" v-model="allow_partial" value="yes"> Sim</label> ' +
-                        '<label class="radio"><input type="radio" :disabled="disabled" v-model="allow_partial" value="no"> Não</label>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="field">' +
-                    '<label class="label">Permitir intervalos (YYYY-MM-DD/YYYY-MM-DD)</label>' +
-                    '<div class="control">' +
-                        '<label class="radio"><input type="radio" :disabled="disabled" v-model="allow_range" value="yes"> Sim</label> ' +
-                        '<label class="radio"><input type="radio" :disabled="disabled" v-model="allow_range" value="no"> Não</label>' +
-                    '</div>' +
-                '</div>' +
+            '<div>' +
+                '<b-field label="Permitir datas parciais (YYYY ou YYYY-MM)">' +
+                    '<b-radio :disabled="disabled" v-model="allow_partial" native-value="yes">Sim</b-radio>' +
+                    '<b-radio :disabled="disabled" v-model="allow_partial" native-value="no">Não</b-radio>' +
+                '</b-field>' +
+                '<b-field label="Permitir intervalos (YYYY-MM-DD/YYYY-MM-DD)">' +
+                    '<b-radio :disabled="disabled" v-model="allow_range" native-value="yes">Sim</b-radio>' +
+                    '<b-radio :disabled="disabled" v-model="allow_range" native-value="no">Não</b-radio>' +
+                '</b-field>' +
             '</div>'
     };
 

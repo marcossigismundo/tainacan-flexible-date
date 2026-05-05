@@ -1,9 +1,9 @@
 /**
  * Componente do filtro "Intervalo de Data Flexível".
  *
- * Renderiza dois inputs (de/até) e emite um par [start, end] com
- * compare = 'BETWEEN' que o backend (Query_Hook) traduz para uma
- * meta_query sobre as postmeta canônicas do Flexible_Date.
+ * Usa <b-input> do Buefy para harmonizar com o admin/tema do Tainacan.
+ * Renderiza dois inputs (de/até) e emite [start, end] que o backend
+ * (Query_Hook) traduz para meta_query sobre as postmeta canônicas.
  */
 (function () {
     'use strict';
@@ -41,23 +41,15 @@
                     return;
                 }
                 this.$emit('input', [this.from || '0001-01-01', this.until || '9999-12-31']);
-            },
-            onInputFrom: function (e) {
-                this.from = e.target.value;
-                this.emitChange();
-            },
-            onInputUntil: function (e) {
-                this.until = e.target.value;
-                this.emitChange();
             }
         },
         template:
             '<div class="tainacan-flexible-date-interval-filter">' +
-                '<div class="field is-grouped">' +
-                    '<div class="control"><input class="input" type="text" placeholder="YYYY-MM-DD" :value="from" @input="onInputFrom" @blur="emitChange"></div>' +
-                    '<span style="margin: 0 0.5em">–</span>' +
-                    '<div class="control"><input class="input" type="text" placeholder="YYYY-MM-DD" :value="until" @input="onInputUntil" @blur="emitChange"></div>' +
-                '</div>' +
+                '<b-field grouped>' +
+                    '<b-field><b-input placeholder="YYYY-MM-DD" v-model="from" @blur="emitChange"></b-input></b-field>' +
+                    '<span style="align-self: center; margin: 0 0.5em">–</span>' +
+                    '<b-field><b-input placeholder="YYYY-MM-DD" v-model="until" @blur="emitChange"></b-input></b-field>' +
+                '</b-field>' +
             '</div>'
     };
 
