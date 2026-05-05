@@ -12,7 +12,14 @@ namespace TFD;
 class Flexible_Date_Interval extends \Tainacan\Filter_Types\Filter_Type {
 
     public function __construct() {
-        parent::__construct();
+        // ATENÇÃO: NÃO chamar parent::__construct().
+        //
+        // O construtor de \Tainacan\Filter_Types\Filter_Type registra
+        //   add_action('register_filter_types', [&$this, 'register_filter_type'])
+        // o que exige que toda subclasse implemente register_filter_type().
+        // Os filter types nativos do Tainacan (Date_Interval, Numeric_Interval,
+        // etc.) deliberadamente NÃO chamam parent::__construct() para não
+        // disparar essa registração. Seguimos o mesmo padrão.
         $this->set_name(__('Intervalo de data flexível', 'tainacan-flexible-date'));
         $this->set_supported_types(['string']);
         $this->set_component('tainacan-filter-flexible-date-interval');
