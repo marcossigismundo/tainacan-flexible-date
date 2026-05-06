@@ -21,19 +21,13 @@ class Flexible_Date_Interval extends \Tainacan\Filter_Types\Filter_Type {
         // etc.) deliberadamente NÃO chamam parent::__construct() para não
         // disparar essa registração. Seguimos o mesmo padrão.
         $this->set_name(__('Intervalo de data flexível', 'tainacan-flexible-date'));
-        $this->set_supported_types(['string']);
+        // Apenas metadados do tipo Flexible_Date (primitive_type = 'flexible-date')
+        // recebem este filtro. Nenhum tipo nativo do Tainacan usa esse identificador.
+        $this->set_supported_types(['flexible-date']);
         $this->set_component('tainacan-filter-flexible-date-interval');
         $this->set_use_max_options(false);
         $this->set_preview_template(
             '<div><input type="text" placeholder="YYYY-MM-DD"> – <input type="text" placeholder="YYYY-MM-DD"></div>'
         );
-    }
-
-    /**
-     * Habilita este filtro APENAS para metadados Flexible_Date.
-     * (set_supported_types('string') deixaria muitos tipos aparecerem na UI.)
-     */
-    public function supports_metadatum_type($metadata_type) {
-        return $metadata_type === 'TFD\\Flexible_Date';
     }
 }

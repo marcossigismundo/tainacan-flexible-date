@@ -15,7 +15,14 @@ class Flexible_Date extends \Tainacan\Metadata_Types\Metadata_Type {
 
     public function __construct() {
         parent::__construct();
-        $this->set_primitive_type(['string']);
+        // primitive_type DEVE ser escalar (string) — a validação em
+        // Filter_Type::validate_options usa in_array($primitive, $supported_types)
+        // que só funciona com escalar. Usamos um identificador único
+        // ('flexible-date') para garantir que só o nosso filtro
+        // (Flexible_Date_Interval, com supported_types=['flexible-date'])
+        // seja oferecido para metadados deste tipo — filtros nativos como
+        // Date_Interval não funcionariam em valores parciais ou intervalos.
+        $this->set_primitive_type('flexible-date');
         $this->set_component('tainacan-flexible-date');
         $this->set_form_component('tainacan-form-flexible-date');
         $this->set_name(__('Data flexível', 'tainacan-flexible-date'));
